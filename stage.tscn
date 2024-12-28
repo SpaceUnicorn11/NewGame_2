@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxrfk1l6e7l6o"]
+
+[ext_resource type="Texture2D" uid="uid://fgrjcpxrfl8m" path="res://Assets/Background.png" id="1_4tgws"]
+[ext_resource type="PackedScene" uid="uid://c7jjwewgcyxnj" path="res://player.tscn" id="2_cpge1"]
+[ext_resource type="Script" path="res://Scripts/Cursor.gd" id="3_ifn67"]
+[ext_resource type="PackedScene" uid="uid://bda74ar100i5n" path="res://mob.tscn" id="4_isjqm"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_g0u2o"]
+vertices = PackedVector2Array(1992.95, 1988, 4, 1989.99, 5, 12, 1985.04, 12)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5, 2, 1995, 2, 2003, 1998, -6, 2000)])
+
+[node name="Stage" type="Node"]
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 2000.0
+offset_bottom = 2000.0
+texture = ExtResource("1_4tgws")
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("2_cpge1")]
+position = Vector2(997, 882)
+
+[node name="Cursor" type="Node2D" parent="Player"]
+script = ExtResource("3_ifn67")
+
+[node name="Camera" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = 0
+limit_right = 2000
+limit_bottom = 2000
+
+[node name="Mob" parent="." instance=ExtResource("4_isjqm")]
+position = Vector2(474, 597)
+
+[node name="Mob2" parent="." instance=ExtResource("4_isjqm")]
+position = Vector2(1517, 604)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_g0u2o")

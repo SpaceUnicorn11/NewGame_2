@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7jjwewgcyxnj"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_dnxsd"]
+[ext_resource type="Texture2D" uid="uid://b074vyxt6o207" path="res://Assets/player_default.png" id="2_aktts"]
+[ext_resource type="PackedScene" uid="uid://dv4pe67ompv4q" path="res://weapon.tscn" id="3_qgg7q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wn4ln"]
+radius = 14.0
+height = 50.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u52h7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_aktts")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Area2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_dnxsd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wn4ln")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_u52h7")
+
+[node name="Weapon" parent="." instance=ExtResource("3_qgg7q")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
