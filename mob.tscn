@@ -1,14 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://bda74ar100i5n"]
+[gd_scene load_steps=9 format=3 uid="uid://bda74ar100i5n"]
 
 [ext_resource type="Texture2D" uid="uid://dtgnnwl37rh7w" path="res://Assets/mob.png" id="1_wv7ny"]
 [ext_resource type="Script" path="res://Scripts/Mob.gd" id="1_yjwx5"]
+[ext_resource type="Texture2D" uid="uid://yt87nylhstme" path="res://Assets/mob_attack.png" id="2_0epew"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2m4p3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jj232"]
-radius = 22.0
-height = 64.0
+height = 50.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rm34w"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0epew")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_wv7ny")
@@ -21,32 +31,45 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_3qn04"]
 radius = 315.991
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xdq8x"]
+radius = 9.0
+height = 72.0
+
 [node name="Mob" type="RigidBody2D"]
 light_mask = 3
 visibility_layer = 3
 collision_layer = 3
 collision_mask = 2
+collision_priority = 3.0
+physics_material_override = SubResource("PhysicsMaterial_2m4p3")
 freeze = true
 script = ExtResource("1_yjwx5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jj232")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rm34w")
+animation = &"attack"
 
 [node name="DetectionArea" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 16
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_3qn04")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 60.0
+target_desired_distance = 50.0
 avoidance_enabled = true
 radius = 30.0
 
-[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_entered"]
+[node name="AttackCollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-12, 0)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_xdq8x")
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

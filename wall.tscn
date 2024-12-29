@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://4yv0icjaenbx"]
+
+[ext_resource type="Texture2D" uid="uid://c84yxe5wa1d1b" path="res://Assets/wall.png" id="1_f6nmh"]
+[ext_resource type="Script" path="res://Scripts/Wall.gd" id="1_sx8v5"]
+
+[node name="OuterWall" type="StaticBody2D"]
+collision_layer = 115
+collision_mask = 115
+collision_priority = 1000.0
+script = ExtResource("1_sx8v5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-250, 91)
+polygon = PackedVector2Array(762, -59, 762, -92, 250, -91, 250, 1909, 2250, 1909, 2250, -91, 1040, -91, 1040, -59, 2216, -59, 2217, 1876, 282, 1876, 283, -59)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(16, 1000.25)
+scale = Vector2(2, 21.0474)
+texture = ExtResource("1_f6nmh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1000, 1983)
+rotation = -1.5708
+scale = Vector2(2, 21.0474)
+texture = ExtResource("1_f6nmh")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(1985, 1000)
+scale = Vector2(2, 21.0474)
+texture = ExtResource("1_f6nmh")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(1395.36, 16)
+rotation = 1.5708
+scale = Vector2(2, 12.724)
+texture = ExtResource("1_f6nmh")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(256.54, 16)
+rotation = 1.5708
+scale = Vector2(2, 5.39426)
+texture = ExtResource("1_f6nmh")

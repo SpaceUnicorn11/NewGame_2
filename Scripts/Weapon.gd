@@ -2,7 +2,6 @@ extends Node2D
 
 @export var projectile_scene: PackedScene
 var cooldown = 1
-var projectile_number = 1
 var damage = 10
 
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +16,7 @@ func _process(delta):
 func shoot():
 	var projectile = projectile_scene.instantiate()
 	projectile.rotation = rotation 
+	projectile.damage = damage
 	get_node('/root/Stage/Player').add_child(projectile)
 	hide()
 	get_node('/root/Stage/Player/Cursor').change_cursor(false)

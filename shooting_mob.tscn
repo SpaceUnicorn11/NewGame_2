@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://wvfl5jhtxuf6"]
+
+[ext_resource type="Texture2D" uid="uid://gflx7tkmbtr6" path="res://Assets/shooting_mob.png" id="1_0gmwy"]
+[ext_resource type="Script" path="res://Scripts/Shooting_mob.gd" id="1_vrne7"]
+[ext_resource type="PackedScene" uid="uid://cjusu0sc41tx" path="res://mob_projectile.tscn" id="2_wnexs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5sac"]
+radius = 24.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m8fsp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0gmwy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jrvun"]
+radius = 544.001
+
+[node name="ShootingMob" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 2
+freeze = true
+script = ExtResource("1_vrne7")
+projectile_scene = ExtResource("2_wnexs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o5sac")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m8fsp")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 68
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_jrvun")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 300.0
+avoidance_enabled = true
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_entered"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

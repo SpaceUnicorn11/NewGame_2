@@ -1,25 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxrfk1l6e7l6o"]
+[gd_scene load_steps=11 format=3 uid="uid://cxrfk1l6e7l6o"]
 
-[ext_resource type="Texture2D" uid="uid://fgrjcpxrfl8m" path="res://Assets/Background.png" id="1_4tgws"]
+[ext_resource type="Texture2D" uid="uid://b528ds5dvkpb4" path="res://Assets/DarkStone.png" id="1_ohr02"]
 [ext_resource type="PackedScene" uid="uid://c7jjwewgcyxnj" path="res://player.tscn" id="2_cpge1"]
 [ext_resource type="Script" path="res://Scripts/Cursor.gd" id="3_ifn67"]
-[ext_resource type="PackedScene" uid="uid://bda74ar100i5n" path="res://mob.tscn" id="4_isjqm"]
+[ext_resource type="Script" path="res://Scripts/Invisible_wall.gd" id="5_1cyt4"]
+[ext_resource type="PackedScene" uid="uid://4yv0icjaenbx" path="res://wall.tscn" id="6_4rlta"]
+[ext_resource type="PackedScene" uid="uid://b6d4d53f2oqo5" path="res://inner_walls.tscn" id="6_a2e1q"]
+[ext_resource type="PackedScene" uid="uid://4x800ytw5uno" path="res://pickup_item.tscn" id="7_ti6fd"]
+[ext_resource type="PackedScene" uid="uid://dgsn20gwh30dh" path="res://boss_mob.tscn" id="8_5shw4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_g0u2o"]
-vertices = PackedVector2Array(1992.95, 1988, 4, 1989.99, 5, 12, 1985.04, 12)
+vertices = PackedVector2Array(1984.01, 17.9297, 1987.97, 1989.97, 9.03906, 1985.02, 17.9531, 5.0625)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-5, 2, 1995, 2, 2003, 1998, -6, 2000)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(8, -5, 1994, 8, 1998, 2000, -1, 1995)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbmih"]
+size = Vector2(280, 29)
 
 [node name="Stage" type="Node"]
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 2000.0
 offset_bottom = 2000.0
-texture = ExtResource("1_4tgws")
+texture = ExtResource("1_ohr02")
 stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_cpge1")]
-position = Vector2(997, 882)
+position = Vector2(1256, 1296)
 
 [node name="Cursor" type="Node2D" parent="Player"]
 script = ExtResource("3_ifn67")
@@ -30,11 +37,41 @@ limit_top = 0
 limit_right = 2000
 limit_bottom = 2000
 
-[node name="Mob" parent="." instance=ExtResource("4_isjqm")]
-position = Vector2(474, 597)
-
-[node name="Mob2" parent="." instance=ExtResource("4_isjqm")]
-position = Vector2(1517, 604)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_g0u2o")
+
+[node name="OuterWall" parent="." instance=ExtResource("6_4rlta")]
+
+[node name="InvisibleWall" type="StaticBody2D" parent="."]
+collision_layer = 115
+collision_mask = 115
+script = ExtResource("5_1cyt4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWall"]
+position = Vector2(651, 14.5)
+shape = SubResource("RectangleShape2D_mbmih")
+
+[node name="InnerWalls" parent="." instance=ExtResource("6_a2e1q")]
+
+[node name="PickupItem" parent="." instance=ExtResource("7_ti6fd")]
+position = Vector2(88, 814)
+
+[node name="PickupItem2" parent="." instance=ExtResource("7_ti6fd")]
+position = Vector2(647, 1846)
+
+[node name="PickupItem3" parent="." instance=ExtResource("7_ti6fd")]
+position = Vector2(1921, 1920)
+
+[node name="PickupItem4" parent="." instance=ExtResource("7_ti6fd")]
+position = Vector2(1215, 83)
+
+[node name="PickupItem5" parent="." instance=ExtResource("7_ti6fd")]
+position = Vector2(908, 1026)
+
+[node name="PickupItem6" parent="." instance=ExtResource("7_ti6fd")]
+position = Vector2(1391, 1229)
+
+[node name="BossMob" parent="." instance=ExtResource("8_5shw4")]
+position = Vector2(1522, 866)
+lock_rotation = true
