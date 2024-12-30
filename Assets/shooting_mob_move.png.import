@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gflx7tkmbtr6"
-path="res://.godot/imported/shooting_mob.png-2ffb4ebc71e821065f1321943ea54a01.ctex"
+uid="uid://dg38f8k5di8oy"
+path="res://.godot/imported/shooting_mob_move.png-dffbebd0982a7bb8f0780e51fb581267.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/shooting_mob.png"
-dest_files=["res://.godot/imported/shooting_mob.png-2ffb4ebc71e821065f1321943ea54a01.ctex"]
+source_file="res://Assets/shooting_mob_move.png"
+dest_files=["res://.godot/imported/shooting_mob_move.png-dffbebd0982a7bb8f0780e51fb581267.ctex"]
 
 [params]
 

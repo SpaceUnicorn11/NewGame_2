@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7jjwewgcyxnj"]
+[gd_scene load_steps=12 format=3 uid="uid://c7jjwewgcyxnj"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_dnxsd"]
+[ext_resource type="Texture2D" uid="uid://r6h3vpwtpmo7" path="res://Assets/player_dead.png" id="2_1crwi"]
 [ext_resource type="Texture2D" uid="uid://b074vyxt6o207" path="res://Assets/player_default.png" id="2_aktts"]
 [ext_resource type="PackedScene" uid="uid://dv4pe67ompv4q" path="res://weapon.tscn" id="3_qgg7q"]
+[ext_resource type="Texture2D" uid="uid://opof85xdduaq" path="res://Assets/player_move.png" id="4_mo2wy"]
+[ext_resource type="Texture2D" uid="uid://cpyx3yjquf5bb" path="res://Assets/player_move_2.png" id="5_ehwtj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wn4ln"]
 radius = 9.0
@@ -12,21 +15,47 @@ height = 23.0
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_1crwi")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_aktts")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mo2wy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ehwtj")
+}],
+"loop": true,
+"name": &"move",
+"speed": 3.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vrjje"]
 radius = 9.0
 height = 23.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtywx"]
+bg_color = Color(0.698756, 0, 0.0224343, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdx8y"]
+bg_color = Color(0.946974, 0, 0.0445284, 1)
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 192
 collision_mask = 64
+motion_mode = 1
 script = ExtResource("1_dnxsd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -44,5 +73,16 @@ collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_vrjje")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+z_index = 1
+offset_left = -10.0
+offset_top = 14.0
+offset_right = 10.0
+offset_bottom = 19.0
+theme_override_styles/background = SubResource("StyleBoxFlat_wtywx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fdx8y")
+value = 70.0
+show_percentage = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

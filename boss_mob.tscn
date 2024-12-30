@@ -1,7 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgsn20gwh30dh"]
+[gd_scene load_steps=12 format=3 uid="uid://dgsn20gwh30dh"]
 
 [ext_resource type="Texture2D" uid="uid://b2pmol6v225he" path="res://Assets/t-rex_default.png" id="1_2b3qo"]
 [ext_resource type="Script" path="res://Scripts/Boss_mob.gd" id="1_mvs3a"]
+[ext_resource type="Texture2D" uid="uid://bmmsy6fnqu1hf" path="res://Assets/t-rex_attack.png" id="2_lt10c"]
+[ext_resource type="Script" path="res://Scripts/Boss_mob_static.gd" id="3_qr1ub"]
+[ext_resource type="Texture2D" uid="uid://f8l0qvy6ffnw" path="res://Assets/t-rex_dead.png" id="3_ryc67"]
+[ext_resource type="Texture2D" uid="uid://w1tfi5kp8q6g" path="res://Assets/t-rex_move.png" id="4_wfcud"]
+[ext_resource type="Texture2D" uid="uid://b3d8xdacppjw5" path="res://Assets/t-rex_move_2.png" id="5_h7b0o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aeejd"]
 radius = 42.0
@@ -11,19 +16,49 @@ height = 188.0
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_lt10c")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ryc67")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_2b3qo")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wfcud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h7b0o")
+}],
+"loop": true,
+"name": &"move",
+"speed": 3.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q5mrk"]
 radius = 341.001
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j3sv0"]
+radius = 46.0
+height = 196.0
+
 [node name="BossMob" type="RigidBody2D"]
 collision_layer = 3
-collision_mask = 2
 mass = 1000.0
 gravity_scale = 0.0
 freeze = true
@@ -46,6 +81,16 @@ collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_q5mrk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("3_qr1ub")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -9)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_j3sv0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

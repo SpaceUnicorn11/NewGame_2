@@ -1,0 +1,293 @@
+[gd_scene load_steps=16 format=3 uid="uid://d2wj1ye6ym5kq"]
+
+[ext_resource type="Texture2D" uid="uid://fgrvggn6bgrv" path="res://Assets/menu_background.png" id="1_j0ngg"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_rs76d"]
+[ext_resource type="PackedScene" uid="uid://cxrfk1l6e7l6o" path="res://stage.tscn" id="1_tn0jp"]
+[ext_resource type="Texture2D" uid="uid://c73chrm6uj5dh" path="res://Assets/victory_background.png" id="2_2uxc8"]
+[ext_resource type="PackedScene" uid="uid://flwmsrabxfqc" path="res://dialog_interface.tscn" id="3_2y1m0"]
+[ext_resource type="Script" path="res://Scripts/ExitButton.gd" id="4_8rxjb"]
+[ext_resource type="Texture2D" uid="uid://g5vgh662wy2j" path="res://Assets/defeat_background.png" id="4_070pv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twjnf"]
+bg_color = Color(0.481789, 0.48179, 0.481789, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10hby"]
+bg_color = Color(0.481789, 0.48179, 0.481789, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hriob"]
+bg_color = Color(0.482353, 0.482353, 0.482353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_110ek"]
+bg_color = Color(0.482353, 0.482353, 0.482353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqc5t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udx80"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bw6h6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8fqan"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_rs76d")
+stage_scene = ExtResource("1_tn0jp")
+dialog_interface_scene = ExtResource("3_2y1m0")
+
+[node name="MainMenu" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="MainMenu"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_j0ngg")
+expand_mode = 1
+
+[node name="ExitButton" type="Button" parent="MainMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 160.0
+offset_right = 100.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_twjnf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_10hby")
+text = "Exit game"
+script = ExtResource("4_8rxjb")
+
+[node name="StartGameButton" type="Button" parent="MainMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_hriob")
+theme_override_styles/normal = SubResource("StyleBoxFlat_110ek")
+text = "Start"
+
+[node name="GameName" type="Label" parent="MainMenu"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -428.0
+offset_top = 19.0
+offset_right = 429.0
+offset_bottom = 156.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.917647)
+theme_override_colors/font_shadow_color = Color(0.631373, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Evil vs T-Rex"
+horizontal_alignment = 1
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="ExitButton" type="Button" parent="PauseMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 160.0
+offset_right = 100.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_twjnf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_10hby")
+text = "Exit game"
+script = ExtResource("4_8rxjb")
+
+[node name="ResumeButton" type="Button" parent="PauseMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_hqc5t")
+theme_override_styles/normal = SubResource("StyleBoxFlat_udx80")
+text = "Resume game"
+
+[node name="MainMenuButton" type="Button" parent="PauseMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_bw6h6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8fqan")
+text = "Main menu"
+
+[node name="EndStageMenu" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="EndStageMenu"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("4_070pv")
+expand_mode = 1
+
+[node name="Restart" type="Button" parent="EndStageMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 16.0
+offset_right = 100.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_bw6h6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8fqan")
+text = "Generate new clone"
+
+[node name="ExitButton" type="Button" parent="EndStageMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 176.0
+offset_right = 100.0
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_twjnf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_10hby")
+text = "Exit game"
+script = ExtResource("4_8rxjb")
+
+[node name="MainMenuButton" type="Button" parent="EndStageMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 96.0
+offset_right = 100.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_bw6h6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8fqan")
+text = "Main menu"
+
+[node name="YouDied" type="Label" parent="EndStageMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -235.5
+offset_top = -140.0
+offset_right = 235.5
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.862078, 0.723299, 0.0744037, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "YOU DIED"
+
+[node name="VictoryMenu" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="VictoryMenu"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_2uxc8")
+expand_mode = 1
+
+[node name="ExitButton" type="Button" parent="VictoryMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 160.0
+offset_right = 100.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_twjnf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_10hby")
+text = "Exit game"
+script = ExtResource("4_8rxjb")
+
+[node name="MainMenuButton" type="Button" parent="VictoryMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_bw6h6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8fqan")
+text = "Main menu"
+
+[node name="YouWon" type="Label" parent="VictoryMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -235.5
+offset_top = -140.0
+offset_right = 235.5
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.886275, 0.0862745, 0.0745098, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Victory!"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MainMenu/ExitButton" to="MainMenu/ExitButton" method="_on_pressed"]
+[connection signal="pressed" from="MainMenu/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="PauseMenu/ExitButton" to="PauseMenu/ExitButton" method="_on_pressed"]
+[connection signal="pressed" from="PauseMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="EndStageMenu/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="EndStageMenu/ExitButton" to="EndStageMenu/ExitButton" method="_on_pressed"]
+[connection signal="pressed" from="EndStageMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="VictoryMenu/ExitButton" to="VictoryMenu/ExitButton" method="_on_pressed"]
+[connection signal="pressed" from="VictoryMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

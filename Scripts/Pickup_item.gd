@@ -22,18 +22,20 @@ func gain_buff(body):
 		"health_pickup":
 			body.max_health += 50
 			body.health = body.max_health
+			get_node('/root/Main/Stage/Player/ProgressBar').max_value = body.max_health
+			get_node('/root/Main/Stage/Player/ProgressBar').value = body.health
 			$Label.show()
 			$Label.text = "+50 MaxHp"
 		"damage_pickup":
-			get_node('/root/Stage/Player/Weapon').damage += 10
+			get_node('/root/Main/Stage/Player/Weapon').damage += 10
 			$Label.show()
 			$Label.text = "+10 Dmg"
 		"movespeed_pickup":
-			body.speed += 100
+			body.speed += 50
 			$Label.show()
-			$Label.text = "+50% Spd"
+			$Label.text = "+25% Spd"
 		"attackspeed_pickup":
-			get_node('/root/Stage/Player/Weapon').cooldown -= 0.2
+			get_node('/root/Main/Stage/Player/Weapon').cooldown -= 0.2
 			$Label.show()
 			$Label.text = "+20% ASpd"
 

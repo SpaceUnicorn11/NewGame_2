@@ -17,10 +17,11 @@ func shoot():
 	var projectile = projectile_scene.instantiate()
 	projectile.rotation = rotation 
 	projectile.damage = damage
-	get_node('/root/Stage/Player').add_child(projectile)
+	#get_node('/root/Stage/Player').add_child(projectile)
+	get_node('/root/Main/Stage/Player').call_deferred("add_child", projectile)
 	hide()
-	get_node('/root/Stage/Player/Cursor').change_cursor(false)
+	get_node('/root/Main/Stage/Player/Cursor').change_cursor(false)
 	await get_tree().create_timer(cooldown).timeout
 	show()
-	get_node('/root/Stage/Player/Cursor').change_cursor(true)
+	get_node('/root/Main/Stage/Player/Cursor').change_cursor(true)
 	#$ShotSound.play()

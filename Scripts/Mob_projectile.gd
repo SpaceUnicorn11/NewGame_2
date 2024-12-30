@@ -8,7 +8,7 @@ var type = 2
 func _ready():
 	show()
 	damage = get_parent().damage
-	var direction = get_node('/root/Stage/Player').position - get_parent().position
+	var direction = get_node('/root/Main/Stage/Player').position - get_parent().position
 	linear_velocity = direction * speed
 	await get_tree().create_timer(3).timeout 
 	queue_free() # despawn projectile 

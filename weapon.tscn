@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://8hj7vmlre5ub" path="res://projectile.tscn" id="2_wfq3l"]
 
 [node name="Weapon" type="Node2D"]
+z_index = 1
 scale = Vector2(0.2, 0.2)
 script = ExtResource("1_yws5f")
 projectile_scene = ExtResource("2_wfq3l")

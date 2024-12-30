@@ -8,7 +8,7 @@ var type = 2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	show()
-	var direction = get_global_mouse_position() - (get_node('/root/Stage/Player').position + Vector2(-6, 6))
+	var direction = get_global_mouse_position() - (get_node('/root/Main/Stage/Player').position + Vector2(-6, 6))
 	linear_velocity = direction * speed
 	await get_tree().create_timer(1.5).timeout 
 	queue_free() # despawn projectile 

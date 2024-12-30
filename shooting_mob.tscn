@@ -1,25 +1,60 @@
-[gd_scene load_steps=7 format=3 uid="uid://wvfl5jhtxuf6"]
+[gd_scene load_steps=11 format=3 uid="uid://wvfl5jhtxuf6"]
 
-[ext_resource type="Texture2D" uid="uid://gflx7tkmbtr6" path="res://Assets/shooting_mob.png" id="1_0gmwy"]
 [ext_resource type="Script" path="res://Scripts/Shooting_mob.gd" id="1_vrne7"]
 [ext_resource type="PackedScene" uid="uid://cjusu0sc41tx" path="res://mob_projectile.tscn" id="2_wnexs"]
+[ext_resource type="Texture2D" uid="uid://8ckhwl4dxc58" path="res://Assets/shooting_mob_attack.png" id="3_nvpul"]
+[ext_resource type="Texture2D" uid="uid://bbsc78eithc2o" path="res://Assets/shooting_mob_dead.png" id="4_kuhec"]
+[ext_resource type="Texture2D" uid="uid://sgoc1y8m82qd" path="res://Assets/shooting_mob_default.png" id="5_288wa"]
+[ext_resource type="Texture2D" uid="uid://dg38f8k5di8oy" path="res://Assets/shooting_mob_move.png" id="6_6eft0"]
+[ext_resource type="Texture2D" uid="uid://c5jf8kglacggw" path="res://Assets/shooting_mob_move_2.png" id="7_baexi"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o5sac"]
-radius = 24.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8uoan"]
+radius = 18.0
+height = 70.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m8fsp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_0gmwy")
+"texture": ExtResource("3_nvpul")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_kuhec")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_288wa")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6eft0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_288wa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_baexi")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jrvun"]
-radius = 544.001
+radius = 362.035
 
 [node name="ShootingMob" type="RigidBody2D"]
 collision_layer = 3
@@ -29,10 +64,14 @@ script = ExtResource("1_vrne7")
 projectile_scene = ExtResource("2_wnexs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_o5sac")
+position = Vector2(-1, 0)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_8uoan")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_m8fsp")
+animation = &"attack"
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 4
@@ -42,8 +81,13 @@ collision_mask = 68
 shape = SubResource("CircleShape2D_jrvun")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 300.0
+target_desired_distance = 50.0
 avoidance_enabled = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(0, 0)
+collision_mask = 208
 
 [connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_entered"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
